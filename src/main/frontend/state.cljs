@@ -1215,6 +1215,12 @@
          :ui/enable-tooltip?
          true)))
 
+(defn enable-autopair?
+  []
+  (get (get (sub-config) (get-current-repo))
+        :editor/enable-autopair?
+        true))
+
 (defn show-command-doc?
   []
   (get (get (sub-config) (get-current-repo))

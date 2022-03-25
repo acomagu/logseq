@@ -2870,19 +2870,22 @@
         (and (autopair-when-selected key) (string/blank? (util/get-selected-text)))
         nil
 
-        (and (not (string/blank? (util/get-selected-text)))
+        (and (state/enable-autopair?)
+             (not (string/blank? (util/get-selected-text)))
              (contains? keycode/left-square-brackets-keys key))
         (do
           (autopair input-id "[" format nil)
           (util/stop e))
 
-        (and (not (string/blank? (util/get-selected-text)))
+        (and (state/enable-autopair?)
+             (not (string/blank? (util/get-selected-text)))
              (contains? keycode/left-paren-keys key))
         (do
           (util/stop e)
           (autopair input-id "(" format nil))
 
-        (contains? (set (keys autopair-map)) key)
+        (and (state/enable-autopair?)
+             (contains? (set (keys autopair-map)) key))
         (do
           (util/stop e)
           (autopair input-id key format nil))
